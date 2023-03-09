@@ -26,4 +26,5 @@ jobs:
         continue-on-error: true
       - name: Run Python
         run: python ./test/RNN_test.py
-        
+      - name: Run Python
+        run: python ./test/TimeRNN_test.py       
