@@ -22,7 +22,7 @@ class TestTimeRNN(unittest.TestCase):
 
     def test_forward(self):
         # Test the forward method of TimeRNN
-        rnn = TimeRNN(self.Wx, self.Wh, self.b)
+        rnn = rnn1.TimeRNN(self.Wx, self.Wh, self.b)
         hs = rnn.forward(self.xs)
         self.assertEqual(
             hs.shape, (5, 8, 20)
@@ -30,7 +30,7 @@ class TestTimeRNN(unittest.TestCase):
 
     def test_backward(self):
         # Test the backward method of TimeRNN
-        rnn = TimeRNN(self.Wx, self.Wh, self.b)
+        rnn = rnn1.TimeRNN(self.Wx, self.Wh, self.b)
         hs = rnn.forward(self.xs)
         dxs = rnn.backward(self.dhs)
         self.assertEqual(
@@ -42,7 +42,7 @@ class TestTimeRNN(unittest.TestCase):
 
     def test_stateful(self):
         # Test the stateful option of TimeRNN
-        rnn = TimeRNN(self.Wx, self.Wh, self.b, stateful=True)
+        rnn = rnn1.TimeRNN(self.Wx, self.Wh, self.b, stateful=True)
         h1 = rnn.forward(self.xs[:, :4, :])
         h2 = rnn.forward(self.xs[:, 4:, :])
         np.testing.assert_allclose(
