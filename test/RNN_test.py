@@ -1,6 +1,14 @@
-import unittest
-import numpy as np
+# Add path for CI/CD tool
+from locale import normalize
+import sys
+import os
 
+sys.path.append(
+    os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../myself/")
+)
+import numpy as np
+import unittest
+import rnn1
 
 class TestRNN(unittest.TestCase):
     def setUp(self):
@@ -8,7 +16,7 @@ class TestRNN(unittest.TestCase):
         Wx = np.random.randn(3, 4)
         Wh = np.random.randn(4, 4)
         b = np.random.randn(4)
-        self.rnn = RNN(Wx, Wh, b)
+        self.rnn = rnn1.RNN(Wx, Wh, b)
 
     def test_forward(self):
         x = np.random.randn(2, 3)
