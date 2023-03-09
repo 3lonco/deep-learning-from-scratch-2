@@ -10,6 +10,7 @@ import numpy as np
 import unittest
 import rnn1
 
+
 class TestRNN(unittest.TestCase):
     def setUp(self):
         # Create an RNN instance
@@ -40,8 +41,8 @@ class TestRNN(unittest.TestCase):
         dh_next = np.random.randn(*h_next.shape)
         dx, dh_prev = self.rnn.backward(dh_next)
         epsilon = 1e-6
-        for param, grad in zip(self.rnn.params, self.rnn.grad):
-            self.assertEqual(param.shape, grad.shape)
+        for param, grads in zip(self.rnn.params, self.rnn.grads):
+            self.assertEqual(param.shape, grads.shape)
             for i in range(param.size):
                 # Compute the numerical gradient
                 param_flat = param.flat[i]
@@ -55,7 +56,7 @@ class TestRNN(unittest.TestCase):
                 numerical_grad = (loss1 - loss2) / (2 * epsilon)
 
                 # Check that the numerical gradient is close to the computed gradient
-                self.assertLess(np.abs(numerical_grad - grad.flat[i]), epsilon)
+                self.assertLess(np.abs(numerical_grad - grads.flat[i]), epsilon)
 
 
 if __name__ == "__main__":
